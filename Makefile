@@ -3,14 +3,14 @@ all: main
 CXX = g++
 CXXFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
-SRCS = main.cpp GameOfLife.cpp ConsoleMode.cpp GraphicsMode.cpp
-HEADERS = GameOfLife.h ConsoleMode.h GraphicsMode.h
+SRCS = main.cpp JeuDeLaVie.cpp ModeConsole.cpp ModeGraphique.cpp
+HEADERS = JeuDeLaVie.h ModeConsole.h ModeGraphique.h
 
 main: $(SRCS) $(HEADERS)
-	$(CXX) $(SRCS) -o game_of_life $(CXXFLAGS)
+	$(CXX) $(SRCS) -o launch $(CXXFLAGS)
 
 build: main
 
 clean:
-	rm -f game_of_life
+	rm -f launch
 	rm -f output_*.txt
