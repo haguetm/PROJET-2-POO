@@ -28,7 +28,6 @@ void ModeGraphique::run() {
         iteration++;
     }
 
-    // Garder la fenêtre ouverte et afficher la dernière génération
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -43,7 +42,7 @@ void ModeGraphique::run() {
 void ModeGraphique::renderGrid(sf::RenderWindow& window) {
     window.clear();
     const auto& grid = game.getGrid();
-    const float cellSize = 10.0f;
+    const int cellSize = 10;
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1, cellSize - 1));
     for (int x = 0; x < grid.size(); ++x) {
         for (int y = 0; y < grid[0].size(); ++y) {
