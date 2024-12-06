@@ -10,60 +10,6 @@
 #include <string>
 #include <limits>
 
-const int gridWidth = 80;
-const int gridHeight = 80;
-const int cellSize = 10;
-
-std::vector<std::vector<int>> grid(gridWidth, std::vector<int>(gridHeight));
-std::vector<std::vector<int>> newGrid(gridWidth, std::vector<int>(gridHeight));
-
-void initializeGrid() {
-    std::srand(std::time(0));
-    for (int x = 0; x < gridWidth; ++x) {
-        for (int y = 0; y < gridHeight; ++y) {
-            grid[x][y] = std::rand() % 2;
-        }
-    }
-}
-
-void updateGrid() {
-    for (int x = 0; x < gridWidth; ++x) {
-        for (int y = 0; y < gridHeight; ++y) {
-            int aliveNeighbors = 0;
-            for (int i = -1; i <= 1; ++i) {
-                for (int j = -1; j <= 1; ++j) {
-                    if (i == 0 && j == 0) continue;
-                    int nx = x + i;
-                    int ny = y + j;
-                    if (nx >= 0 && nx < gridWidth && ny >= 0 && ny < gridHeight) {
-                        aliveNeighbors += grid[nx][ny];
-                    }
-                }
-            }
-            if (grid[x][y] == 1) {
-                newGrid[x][y] = (aliveNeighbors == 2 || aliveNeighbors == 3) ? 1 : 0;
-            } else {
-                newGrid[x][y] = (aliveNeighbors == 3) ? 1 : 0;
-            }
-        }
-    }
-    grid = newGrid;
-}
-
-void renderGrid(sf::RenderWindow &window) {
-    window.clear();
-    sf::RectangleShape cell(sf::Vector2f(cellSize - 1, cellSize - 1));
-    for (int x = 0; x < gridWidth; ++x) {
-        for (int y = 0; y < gridHeight; ++y) {
-            if (grid[x][y] == 1) {
-                cell.setPosition(x * cellSize, y * cellSize);
-                window.draw(cell);
-            }
-        }
-    }
-    window.display();
-}
-
 int main() {
     int width = 100, height = 100;
     std::string filename;
@@ -79,7 +25,7 @@ int main() {
             char mode;
             std::cout << "Choisissez le mode (c pour console, g pour graphique) : ";
             std::cin >> mode;
-            std::cin.ignore(); // Ignorer le caractère de nouvelle ligne laissé dans le buffer
+            std::cin.ignore();
             int iterations = -1;
             if (mode == 'c') {
                 while (true) {
@@ -98,7 +44,7 @@ int main() {
                     }
                 }
                 ModeConsole consoleMode(game, iterations);
-                consoleMode.deleteOutputFiles(); // Supprimer les fichiers avant de commencer
+                consoleMode.deleteOutputFiles();
                 consoleMode.run();
             } else if (mode == 'g') {
                 std::cout << "Entrez le nombre d'itérations (laissez vide pour un arrêt automatique) : ";
@@ -134,7 +80,7 @@ int main() {
         char mode;
         std::cout << "Choisissez le mode (c pour console, g pour graphique) : ";
         std::cin >> mode;
-        std::cin.ignore(); // Ignorer le caractère de nouvelle ligne laissé dans le buffer
+        std::cin.ignore();
         int iterations = -1;
         if (mode == 'c') {
             while (true) {
@@ -153,7 +99,7 @@ int main() {
                 }
             }
             ModeConsole consoleMode(game, iterations);
-            consoleMode.deleteOutputFiles(); // Supprimer les fichiers avant de commencer
+            consoleMode.deleteOutputFiles();
             consoleMode.run();
         } else if (mode == 'g') {
             std::cout << "Entrez le nombre d'itérations (laissez vide pour un arrêt automatique) : ";

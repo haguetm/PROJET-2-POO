@@ -9,7 +9,7 @@ void JeuDeLaVie::initializeGrid() {
     std::srand(std::time(0));
     for (int x = 0; x < width; ++x) {
         for (int y = 0; y < height; ++y) {
-            grid[x][y] = std::rand() % 2;  // Initialiser aléatoirement les cellules comme vivantes ou mortes
+            grid[x][y] = std::rand() % 2;
         }
     }
 }

@@ -5,7 +5,7 @@ ModeGraphique::ModeGraphique(JeuDeLaVie& game, int iterations) : game(game), ite
 void ModeGraphique::run() {
     const int width = game.getGrid().size();
     const int height = game.getGrid()[0].size();
-    const float cellSize = 10.0f;
+    const int cellSize = 10;
 
     sf::RenderWindow window(sf::VideoMode(width * cellSize, height * cellSize), "Jeu de la Vie");
 
@@ -44,7 +44,7 @@ void ModeGraphique::renderGrid(sf::RenderWindow& window) {
     window.clear();
     const auto& grid = game.getGrid();
     const float cellSize = 10.0f;
-    sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
+    sf::RectangleShape cell(sf::Vector2f(cellSize - 1, cellSize - 1));
     for (int x = 0; x < grid.size(); ++x) {
         for (int y = 0; y < grid[0].size(); ++y) {
             if (grid[x][y] == 1) {
