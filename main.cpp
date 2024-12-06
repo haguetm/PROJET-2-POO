@@ -12,7 +12,7 @@
 
 const int gridWidth = 80;
 const int gridHeight = 80;
-const float cellSize = 10.0f;
+const int cellSize = 10;
 
 std::vector<std::vector<int>> grid(gridWidth, std::vector<int>(gridHeight));
 std::vector<std::vector<int>> newGrid(gridWidth, std::vector<int>(gridHeight));
@@ -21,7 +21,7 @@ void initializeGrid() {
     std::srand(std::time(0));
     for (int x = 0; x < gridWidth; ++x) {
         for (int y = 0; y < gridHeight; ++y) {
-            grid[x][y] = std::rand() % 2;  // Initialiser aléatoirement les cellules comme vivantes ou mortes
+            grid[x][y] = std::rand() % 2;
         }
     }
 }
@@ -52,7 +52,7 @@ void updateGrid() {
 
 void renderGrid(sf::RenderWindow &window) {
     window.clear();
-    sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
+    sf::RectangleShape cell(sf::Vector2f(cellSize - 1, cellSize - 1));
     for (int x = 0; x < gridWidth; ++x) {
         for (int y = 0; y < gridHeight; ++y) {
             if (grid[x][y] == 1) {
@@ -65,7 +65,7 @@ void renderGrid(sf::RenderWindow &window) {
 }
 
 int main() {
-    int width = 100, height = 100; // Taille par défaut
+    int width = 100, height = 100;
     std::string filename;
     std::cout << "Entrez le nom du fichier pour la grille initiale (laissez vide pour une initialisation aléatoire) : ";
     std::getline(std::cin, filename);
